@@ -15,8 +15,6 @@ which provides the user with a basic set of features for manipulating and tracki
 3. Fork this repository into YOUR OWN Github user account.
 4. Issue a Pull Request From YOUR own forked repository to our Main branch for evaluation
 
----
-
 ## Task Details
 ### Objective
 
@@ -47,22 +45,11 @@ Build a simple to-do list application using React
 
 #### Bonus 🎉:
 - Implement task categories (Work, Personal, etc.)
-- Add a search feature to filter tasks
+- Add a filter feature to filter tasks by category
 - Add a due date to tasks
   - Add a visual indicator for tasks exceeding the due date
   - Add a metric displaying the # of open tasks exceeding the due date
 - Use lazy-loading (ie. React Suspense)
-
-#### Evaluation Criteria 📝:
-
-- Code quality and organization
-- Functionality and feature completeness
-- Approach and strategy to problem solving
-- Attention to detail (UI/UX)
-
-#### Submission Deadline 🕙:
-
-Please submit your completed test within 5 days.
 
 ## Things We Are Looking For:
 1. Ability to understand/constrain the problem
@@ -72,7 +59,7 @@ Please submit your completed test within 5 days.
 5. Familiarity and comfort writing tests
 
 ### Notes:
-This exercise should take no more than 3 hours, but feel free to invest as much time as required to complete the challenge.
+This exercise should take no more than 8 hours, but feel free to invest as much time as required to complete the challenge.
 
 Feel free to use any IDE you are comfortable using to run the server
 
