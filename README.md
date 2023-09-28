@@ -28,8 +28,9 @@ Build a simple to-do list application using React
     - **Add Task**: Provide an input field to add new tasks to the list.
     - **Delete Task**: Add a delete button next to each task.
     - **Edit Task**: Double-click on a task to make it editable.
-    - **Undo Action:** Add a undo button which will undo the previous Add OR Delete action
-    - **Redo Action:** Add a redo button which will redo the previous undo action
+    - **Finish Task**: Implement an intuitive way for the user to set a task as 'done'.
+    - **Undo Action:** Add an undo button which will undo the previous Add OR Delete OR Finish action.
+    - **Redo Action:** Add a redo button which will redo the previous undo action.
 
 **Page 2: Metrics View**
 - **Display**: Page should display the following simple metrics:
@@ -41,7 +42,7 @@ Build a simple to-do list application using React
 - **State Management**: Use Redux (for React) to manage state.
 - **Styling**: Use CSS/SCSS to make it visually appealing.
   - You _may_ use a React component library of your choosing (ie. Material UI)
-- **Unit Tests**: Implement atleast one unit test using a framework you are familiar with (Jest, Mocha, React Testing Library, etc.).
+- **Unit Tests**: Implement at least one unit test using a framework you are familiar with (Jest, Mocha, React Testing Library, etc.).
     - Bonus 🎉 for more unit test coverage
 
 #### Bonus 🎉:
