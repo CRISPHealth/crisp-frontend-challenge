@@ -28,7 +28,7 @@ Build a simple to-do list application using React
     - **Add Task**: Provide an input field to add new tasks to the list.
     - **Delete Task**: Add a delete button next to each task.
     - **Edit Task**: Double-click on a task to make it editable.
-    - **Finish Task**: Implement an intuitive way for the user to set a task as 'done'.
+    - **Complete Task**: Implement an intuitive way for the user to set a task as 'done'.
     - **Undo Action:** Add an undo button which will undo the previous Add OR Delete OR Finish action.
     - **Redo Action:** Add a redo button which will redo the previous undo action.
 
