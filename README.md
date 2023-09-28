@@ -18,9 +18,10 @@ which provides the user with a basic set of features for manipulating and tracki
 ## Task Details
 ### Objective
 
-Build a simple to-do list application using React
+Build a simple to-do list application using React.
 
 #### Requirements ✅:
+
 
 **Page 1: ToDo List View**
 
@@ -36,16 +37,14 @@ Build a simple to-do list application using React
 - **Display**: Page should display the following simple metrics:
   - \# of tasks completed
   - \# of open tasks
-  - Avg. duration for completed task
   
-**Additional**
-- **State Management**: Use Redux (for React) to manage state.
+**Additional **
+- **State Management**: Use a React statement management library such as Redux to manage state.
 - **Styling**: Use CSS/SCSS to make it visually appealing.
   - You _may_ use a React component library of your choosing (ie. Material UI)
-- **Unit Tests**: Implement at least one unit test using a framework you are familiar with (Jest, Mocha, React Testing Library, etc.).
-    - Bonus 🎉 for more unit test coverage
 
 #### Bonus 🎉:
+- Implement at least one unit test using a framework you are familiar with (Jest, Mocha, React Testing Library, etc.).
 - Implement task categories (Work, Personal, etc.)
 - Add a filter feature to filter tasks by category
 - Add a due date to tasks
@@ -61,8 +60,6 @@ Build a simple to-do list application using React
 5. Familiarity and comfort writing tests
 
 ### Notes:
-This exercise should take no more than 5 hours, but feel free to invest as much time as required to complete the challenge.
-
 Feel free to use any IDE you are comfortable using to run the server
 
 ### Startup:
