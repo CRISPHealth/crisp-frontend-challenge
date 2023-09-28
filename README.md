@@ -41,7 +41,8 @@ Build a simple to-do list application using React
 - **State Management**: Use Redux (for React) to manage state.
 - **Styling**: Use CSS/SCSS to make it visually appealing.
   - You _may_ use a React component library of your choosing (ie. Material UI)
-- **Unit Tests**: Implement unit tests using a framework you are familiar with (Jest, Mocha, React Testing Library, etc.)
+- **Unit Tests**: Implement atleast one unit test using a framework you are familiar with (Jest, Mocha, React Testing Library, etc.).
+    - Bonus 🎉 for more unit test coverage
 
 #### Bonus 🎉:
 - Implement task categories (Work, Personal, etc.)
@@ -59,7 +60,7 @@ Build a simple to-do list application using React
 5. Familiarity and comfort writing tests
 
 ### Notes:
-This exercise should take no more than 8 hours, but feel free to invest as much time as required to complete the challenge.
+This exercise should take no more than 5 hours, but feel free to invest as much time as required to complete the challenge.
 
 Feel free to use any IDE you are comfortable using to run the server
 
