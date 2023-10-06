@@ -1,42 +1,175 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  --primary: rgb(15, 114, 181);
+  --secondary:rgb(0, 153, 255);
+  --tertiary:rgba(2, 68, 112, 0.77);
+  --text-color:#414141;
+  
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  max-width: 400px;
+  margin: 0 auto;  
   text-align: center;
 }
+nav  {
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  background: var(--primary);
+  padding: 1em;
+  border-radius: 8px;  
+  font-weight: 600;
+}
+nav a {
+  color:white;
+  text-decoration: none;
+  font-size: 1.2em;
+  text-transform: uppercase;
+}
+nav a.active{
+  text-decoration: underline;
+  text-decoration-thickness: 2px;  
+}
+nav a:hover {
+  color:rgba(255, 255, 255, 0.797);
+}
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+form {
+  padding: 0;
+  margin: 19px 0;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+input[type="text"] {
+  background: none;
+  outline: none;
+  border: none;
+  min-width: 10px;
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.add {
+  height: 3em;
+  background: white;
+  box-shadow: 1px 1px 8px 0px #00000038;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
 }
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.add input {
+  height:90%;
+  border: none;
+  outline:none;
+  background: none;
+  font-size: 1.1em;
+  padding: 4px;
+  flex-grow: 1;
+}
+.add button {
+  background:var(--secondary);
+  border:none;
+  outline:none;
+  cursor: pointer;
+  color:white;
+  height:100%;
+  width: 4em;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  font-size: 1em;
+  font-weight: bold;
+}
+  .add button:hover {
+    background:var(--primary);
+    text-decoration: underline;    
   }
-  to {
-    transform: rotate(360deg);
+
+  .undo {
+    background:var(--primary);
+    border:none;
+    outline:none;
+    cursor: pointer;
+    color:white;   
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;    
   }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  .undo:hover {
+    background:var(--secondary);
   }
+
+ul {
+  list-style-type: none;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  gap: 0.5em;
+  padding: 0;
+  padding: 2px;
+}
+.stats li {
+  display: flex;
+  justify-content: space-between;  
+  padding: 0 0.8em;
+  font-size: 1em;
+  font-weight: bold;  
 }
 
-.card {
-  padding: 2em;
+ul li {
+  display: flex;
+  align-items: center;
+  /* color:white; */
+  border: 1px solid var(--primary);
+  border-radius: 4px;    
+  padding: 2px;
+  height: 48px;  
+  position: relative;
+  padding-top: 10px;
+  color:var(--text-color);
 }
+.todo input[type="checkbox"]{
+  height: 25px;
+  width: 25px;  
+  cursor: pointer;
+}
+.todo-text {
+  flex-grow:1;
+  font-size:1.2em;
+  cursor: pointer;
+}
+.todo.complete {
+  background: rgba(131, 255, 131, 0.459);
+  border-color: rgba(131, 255, 131, 0.459);
+}
+.todo .complete-text {
+  text-decoration: line-through;
+  text-decoration-thickness: 3px;
+}
+.todo-control {
+  border: none;
+  border-radius: 8px; 
+  background: none;
+  cursor: pointer;
+}
+.delete {
+  color:rgb(251, 80, 80);
+}
+  .delete:hover {
+    color: rgb(193, 63, 63);
+    
+  }
+.save {
+  color:rgb(55, 190, 55);
+}
+  .save:hover {
+    color:rgb(45, 159, 45);
+  }
 
-.read-the-docs {
-  color: #888;
+.categories {
+  cursor: pointer;
+  outline:none;
+  border:none;
+  margin: 0 1em 0 0;
+  color:var(--text-color);
+  font-weight: 600;
+}
+.category {
+  position: absolute;
+  top: 0;
+  font-size: 0.85em;
+  font-weight: 600;
+  color: var(--tertiary);
 }
