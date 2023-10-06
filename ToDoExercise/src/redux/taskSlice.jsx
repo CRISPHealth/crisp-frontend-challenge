@@ -1,34 +1,73 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
+import { createSelector } from '@reduxjs/toolkit';
 
-const tasksSlice = createSlice({
-  name: 'tasks',
-  initialState: [],
+const defaultState = {
+  previousTasks: [],
+  currentTasks: [],
+};
+
+const taskSlice = createSlice({
+  name: "taskSlice",
+  initialState: defaultState,
   reducers: {
-    addTask: (state, action) => {
-      state.push(action.payload);
+    appendTask: (state, action) => {
+        const { taskText, taskCategory } = action.payload;
+        if (!taskText?.trim()) return;
+        state.previousTasks = [...state.previousTasks, [...state.currentTasks]];
+        state.currentTasks.push({
+          text: taskText,
+          category: taskCategory,
+          isDone: false,
+          addedOn: Date.now(),
+          finishedOn: null,
+        });
     },
-    deleteTask: (state, action) => {
-      return state.filter(task => task.id !== action.payload);
+    modifyTask: (state, action) => {
+      state.previousTasks = [...state.previousTasks, [...state.currentTasks]];
+      const { taskText, taskCategory } = action.payload;
+      state.currentTasks[action.payload.position] = {
+        ...state.currentTasks[action.payload.position],
+        text: taskText,
+        category: taskCategory
+      };
     },
-    toggleTaskCompletion: (state, action) => {
-        const task = state.find(task => task.id === action.payload);
-        task.completed = !task.completed;
-        if (task.completed) { 
-          task.completionDate = new Date().toISOString().split('T')[0]; // Store the current date as completion date
-        } else {
-          task.completionDate = null;
-        }
-      },
-    editTask: (state, action) => {
-      const task = state.find(task => task.id === action.payload.id);
-      if (task) {
-        task.text = action.payload.text;
-        task.category = action.payload.category;
-        task.dueDate = action.payload.dueDate;
-      }
+    removeTask: (state, action) => {
+      state.previousTasks = [...state.previousTasks, [...state.currentTasks]];
+      state.currentTasks.splice(action.payload, 1);
+    },
+    markTaskAsComplete: (state, action) => {
+      state.previousTasks = [...state.previousTasks, [...state.currentTasks]];
+      state.currentTasks[action.payload] = {
+        ...state.currentTasks[action.payload],
+        isDone: true,
+        finishedOn: Date.now(),
+      };
+    },
+    revertAction: (state) => {
+      if (!state.previousTasks.length) return;
+
+      const latestState = state.previousTasks[state.previousTasks.length - 1];
+      const updatedPreviousTasks = state.previousTasks.slice(0, state.previousTasks.length - 1);
+
+      state.currentTasks = [...latestState];
+      state.previousTasks = updatedPreviousTasks;
     },
   },
 });
 
-export const { addTask, deleteTask, toggleTaskCompletion, editTask } = tasksSlice.actions;
-export default tasksSlice.reducer;
+export const { appendTask, modifyTask, removeTask, markTaskAsComplete, revertAction } =
+  taskSlice.actions;
+
+  export const fetchTasks = (state) => state.store.currentTasks;
+
+  export const fetchCompletedTasks = createSelector(
+    [fetchTasks],
+    (tasks) => tasks.filter((taskItem) => taskItem.isDone)
+  );
+  
+  export const fetchPendingTasks = createSelector(
+    [fetchTasks],
+    (tasks) => tasks.filter((taskItem) => !taskItem.isDone)
+  );
+
+export default taskSlice.reducer;
