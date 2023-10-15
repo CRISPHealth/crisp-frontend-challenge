@@ -26,8 +26,8 @@ function Tasks () {
     const [onDeleteTask, setOnDeleteTask] = useState(() => console.log('OnDeleteTask - Not Impelemented'));
     const [storedTaskList, setStoredTaskList] = useState([]);
     const onAddTaskSave = (taskName) => {
-        console.log(taskName);
         let currentTasks = [...tasks];
+        storeTaskListCopy([...tasks]);
         let newTask = {
             name: taskName,
             createdOn: new Date().getDate()
@@ -53,6 +53,8 @@ function Tasks () {
     const onCompleteEdit = (taskName) => {
 
         let updateTasks = [...tasks];
+
+        storeTaskListCopy([...tasks]);
 
         let modifiedTasks = updateTasks.map((task) => {
             if (task.name === taskName) {
@@ -80,23 +82,34 @@ function Tasks () {
     const onCompleteDelete = () => {
 
         let updateTasks = [...tasks];
+        storeTaskListCopy([...tasks]);
         let filteredTasks = updateTasks.filter((x) => x.name !== deletingTaskName);
         setTasks(filteredTasks);
         setShowConfirmation(false);
     }
 
-    const storeTaskListCopy = () => {
+    const storeTaskListCopy = (tasks) => {
 
         let updateStoredTaskList = [...storedTaskList];
-        let currentTaskList = [...tasks];
-        updateStoredTaskList.push(currentTaskList);
+        updateStoredTaskList.push(tasks);
+        console.log({StoredTaskList: updateStoredTaskList})
         setStoredTaskList(updateStoredTaskList);
     }
 
     const undoTaskList = () => {
-        let updateTasks = [...tasks];
-        updateTasks.pop();
-        setTasks(updateTasks);
+
+        let copiedTasksList = [...storedTaskList];
+        
+        if (copiedTasksList.length > 0) {
+            let newTaskList = [...copiedTasksList[copiedTasksList.length - 1]];
+            copiedTasksList.pop();
+            setTasks(newTaskList);
+            setStoredTaskList(copiedTasksList);
+            return;
+        }
+        
+        setTasks([]);
+        setStoredTaskList(copiedTasksList);
     }
 
     return (<div>
