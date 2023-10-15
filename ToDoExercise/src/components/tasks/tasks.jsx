@@ -19,6 +19,7 @@ function Tasks () {
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [editingTaskName, setEditingTaskName] = useState();
     const [updateTaskName, setUpdateTaskName] = useState();
+    const [confirmationType, setConfirmationType] = useState();
     const [confirmationDisplay, setConfirmationDisplay] = useState();
     const [onDeleteTask, setOnDeleteTask] = useState(() => console.log('OnDeleteTask - Not Impelemented'));
 
@@ -36,6 +37,7 @@ function Tasks () {
 
     const onBeginEdit = (taskName) => {
         setEditingTaskName(taskName);
+        setConfirmnationType('edit');
     }
 
     const onEdit_TextChanged = (event) => {
@@ -61,15 +63,14 @@ function Tasks () {
             return task;
         });
 
-        console.log({ModifiedTasks: modifiedTasks})
         setTasks(modifiedTasks);
         setEditingTaskName(undefined);
     }
     const onBeginDelete = (taskName) => {
         setConfirmationDisplay('Are you sure you want to delete this?');
         setShowConfirmation(true);
+        setConfirmationType('delete');
     }
-
 
     const onDelete = (taskName) => {
         let updateTasks = [...tasks];
@@ -86,7 +87,7 @@ function Tasks () {
         {showConfirmation &&
             <EditTaskConfirmation
                 text={confirmationDisplay}
-                onYes={() => onDeleteTask()}
+                onYes={() => onDelete()}
                 onNo={() => setShowConfirmation(false)}/>}
             <h1>Tasks</h1>
         <div>
