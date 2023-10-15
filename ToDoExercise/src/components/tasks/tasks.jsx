@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {Form} from 'react-bootstrap'
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
-import AddTask from './add-task/add-task';
+import AddTask from './edit-task/edit-task';
 import Plus from '../../assets/plus.png';
 import Delete from '../../assets/bin.png';
 import Edit from '../../assets/pen.png';
@@ -14,6 +14,8 @@ function Tasks () {
     const [tasks, setTasks] = useState([]);
     const [taskName, setTaskName] = useState();
     const [showEditTask, setShowEditTask] = useState(false);
+    const [showConfirmation, setShowConfirmation] = useState(false);
+    const [confirmationType, setConfirmationType] = useState();
 
     const onAddTaskSave = (taskName) => {
         console.log(taskName);
@@ -25,6 +27,15 @@ function Tasks () {
         currentTasks.push(newTask);
         setTasks(currentTasks);
         setShowEditTask(false);
+    }
+
+    const onBeginEdit = (taskName) => {
+        setConfirmationType('edit');
+    }
+
+    const onBeginDelete = (taskName) => {
+        setConfirmationType('delete');
+        showConfirmation(true);
     }
 
     return (<div>
@@ -51,8 +62,8 @@ function Tasks () {
                             <td>{task.createdOn}</td>
                             <td>
                                 <div className={'icon-group-horizontal'}>
-                                    <img src={Edit}/>
-                                    <img src={Delete}/>
+                                    <img onClick={() => onBeginEdit(task.name)} src={Edit}/>
+                                    <img onClick={() => onBeginDelete(task.name)} src={Delete}/>
                                 </div>
                             </td>
                         </tr>

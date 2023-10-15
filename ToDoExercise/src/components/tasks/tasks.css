@@ -1,6 +1,9 @@
 .tasks-container {
     display:grid;
 }
+.tasks-list-cell {
+    
+}
 .icon-group-horizontal {
     display:flex;
 }
