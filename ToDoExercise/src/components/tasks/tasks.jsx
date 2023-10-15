@@ -8,6 +8,7 @@ import Delete from '../../assets/bin.png';
 import Edit from '../../assets/pen.png';
 import Check from '../../assets/check.png';
 import Cancel from '../../assets/cancel.png';
+import Undo from '../../assets/undo.png';
 import DeleteTaskConfirmation from './delete-task-confirmation/delete-task-confirmation';
 import './tasks.css';
 
@@ -23,7 +24,7 @@ function Tasks () {
     const [confirmationType, setConfirmationType] = useState();
     const [confirmationDisplay, setConfirmationDisplay] = useState();
     const [onDeleteTask, setOnDeleteTask] = useState(() => console.log('OnDeleteTask - Not Impelemented'));
-
+    const [storedTaskList, setStoredTaskList] = useState([]);
     const onAddTaskSave = (taskName) => {
         console.log(taskName);
         let currentTasks = [...tasks];
@@ -50,6 +51,7 @@ function Tasks () {
     }
 
     const onCompleteEdit = (taskName) => {
+
         let updateTasks = [...tasks];
 
         let modifiedTasks = updateTasks.map((task) => {
@@ -68,6 +70,7 @@ function Tasks () {
         setEditingTaskName(undefined);
     }
     const onBeginDelete = (taskName) => {
+
         setDeletingTaskName(taskName);
         setConfirmationDisplay(`Are you sure you want to delete '${taskName}?'`);
         setShowConfirmation(true);
@@ -75,10 +78,25 @@ function Tasks () {
     }
 
     const onCompleteDelete = () => {
+
         let updateTasks = [...tasks];
         let filteredTasks = updateTasks.filter((x) => x.name !== deletingTaskName);
         setTasks(filteredTasks);
         setShowConfirmation(false);
+    }
+
+    const storeTaskListCopy = () => {
+
+        let updateStoredTaskList = [...storedTaskList];
+        let currentTaskList = [...tasks];
+        updateStoredTaskList.push(currentTaskList);
+        setStoredTaskList(updateStoredTaskList);
+    }
+
+    const undoTaskList = () => {
+        let updateTasks = [...tasks];
+        updateTasks.pop();
+        setTasks(updateTasks);
     }
 
     return (<div>
@@ -96,6 +114,7 @@ function Tasks () {
         <div>
             <div className={'icon-group-horizontal'}>
                 <img onClick={() => setShowEditTask(true)} className={'tasks-icon'} src={Plus}/>
+                <img onClick={() => undoTaskList()} className={'task-icon'} src={Undo}/>
             </div>
             
             <Table bordered striped size='lg' responsive>
