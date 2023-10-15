@@ -6,14 +6,6 @@ import './delete-task-confirmation.css';
 
 function EditTaskConfirmation (props) {
 
-    const getActionDisplay = () => {
-        if (props.type === 'edit') {
-            return 'Are you sure you would like to update this task name?';
-        }
-        else if (props.type === 'delete') {
-            return `Are you sure you would like to delete '${props.taskName}'?`;
-        }
-    }
     return (
         <Modal show={true}>
             <Modal.Body>
