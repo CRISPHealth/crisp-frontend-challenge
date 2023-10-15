@@ -6,7 +6,7 @@ import AddTask from './edit-task/edit-task';
 import Plus from '../../assets/plus.png';
 import Delete from '../../assets/bin.png';
 import Edit from '../../assets/pen.png';
-
+import EditTaskConfirmation from './edit-task-confirmation/edit-task-confirmation';
 import './tasks.css';
 
 function Tasks () {
@@ -43,7 +43,12 @@ function Tasks () {
             <AddTask 
                 onClose={() => setShowEditTask(false)} 
                 onSave={(taskName) => onAddTaskSave(taskName)}/>}
-        <h1>Tasks</h1>
+
+        {showConfirmation &&
+            <EditTaskConfirmation
+                onYes={() =>{}}
+                onNo={() => {}}/>}
+            <h1>Tasks</h1>
         <div>
             <div className={'icon-group-horizontal'}>
                 <img onClick={() => setShowEditTask(true)} className={'tasks-icon'} src={Plus}/>
