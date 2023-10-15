@@ -49,11 +49,7 @@ function Tasks () {
     const onCompleteEdit = (taskName) => {
         let updateTasks = [...tasks];
 
-        console.log({UpdateTaskName: updateTaskName});
-
         let modifiedTasks = updateTasks.map((task) => {
-            console.log(task)
-            console.log({TaskName: taskName})
             if (task.name === taskName) {
                 return {
                     name: updateTaskName,
