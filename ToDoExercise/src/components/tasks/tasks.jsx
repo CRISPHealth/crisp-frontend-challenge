@@ -75,10 +75,8 @@ function Tasks () {
     }
 
     const onCompleteDelete = () => {
-        console.log({TaskName: taskName})
         let updateTasks = [...tasks];
         let filteredTasks = updateTasks.filter((x) => x.name !== deletingTaskName);
-        console.log({FilteredTasks: filteredTasks})
         setTasks(filteredTasks);
         setShowConfirmation(false);
     }
