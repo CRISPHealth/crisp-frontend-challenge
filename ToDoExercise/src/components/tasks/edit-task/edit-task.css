@@ -1,0 +1,5 @@
+.add-task-container {
+    display:grid;
+    grid-template-rows: 1fr auto;
+    row-gap: 8px;
+}

@@ -1,0 +1,7 @@
+.edit-task-confirmation-button-group {
+    display:grid;
+    grid-template-columns: 100px 100px;
+}
+.edit-task-confirmation-button {
+    margin:8px
+}
