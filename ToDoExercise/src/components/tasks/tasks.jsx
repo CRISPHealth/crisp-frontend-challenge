@@ -6,6 +6,8 @@ import AddTask from './edit-task/edit-task';
 import Plus from '../../assets/plus.png';
 import Delete from '../../assets/bin.png';
 import Edit from '../../assets/pen.png';
+import Check from '../../assets/check.png';
+import Cancel from '../../assets/cancel.png';
 import EditTaskConfirmation from './edit-task-confirmation/edit-task-confirmation';
 import './tasks.css';
 
@@ -15,7 +17,10 @@ function Tasks () {
     const [taskName, setTaskName] = useState();
     const [showEditTask, setShowEditTask] = useState(false);
     const [showConfirmation, setShowConfirmation] = useState(false);
-    const [confirmationType, setConfirmationType] = useState();
+    const [editingTaskName, setEditingTaskName] = useState();
+    const [updateTaskName, setUpdateTaskName] = useState();
+    const [confirmationDisplay, setConfirmationDisplay] = useState();
+    const [onDeleteTask, setOnDeleteTask] = useState(() => console.log('OnDeleteTask - Not Impelemented'));
 
     const onAddTaskSave = (taskName) => {
         console.log(taskName);
@@ -30,12 +35,50 @@ function Tasks () {
     }
 
     const onBeginEdit = (taskName) => {
-        setConfirmationType('edit');
+        setEditingTaskName(taskName);
     }
 
+    const onEdit_TextChanged = (event) => {
+        setUpdateTaskName(event.target.value);
+    }
+
+    const onCancelEdit = () => {
+        setEditingTaskName(undefined);
+    }
+
+    const onCompleteEdit = (taskName) => {
+        let updateTasks = [...tasks];
+
+        console.log({UpdateTaskName: updateTaskName});
+
+        let modifiedTasks = updateTasks.map((task) => {
+            console.log(task)
+            console.log({TaskName: taskName})
+            if (task.name === taskName) {
+                return {
+                    name: updateTaskName,
+                    createdOn: task.createdOn,
+                    UpdatedOn: new Date().getTime()
+                };
+            }
+
+            return task;
+        });
+
+        console.log({ModifiedTasks: modifiedTasks})
+        setTasks(modifiedTasks);
+        setEditingTaskName(undefined);
+    }
     const onBeginDelete = (taskName) => {
-        setConfirmationType('delete');
-        showConfirmation(true);
+        setConfirmationDisplay('Are you sure you want to delete this?');
+        setShowConfirmation(true);
+    }
+
+
+    const onDelete = (taskName) => {
+        let updateTasks = [...tasks];
+        let filteredTasks = updateTasks.filter((x) => x.name !== taskName);
+        setTasks(filteredTasks);
     }
 
     return (<div>
@@ -46,8 +89,9 @@ function Tasks () {
 
         {showConfirmation &&
             <EditTaskConfirmation
-                onYes={() =>{}}
-                onNo={() => {}}/>}
+                text={confirmationDisplay}
+                onYes={() => onDeleteTask()}
+                onNo={() => setShowConfirmation(false)}/>}
             <h1>Tasks</h1>
         <div>
             <div className={'icon-group-horizontal'}>
@@ -63,13 +107,23 @@ function Tasks () {
                 <tbody>
                     {tasks.map((task) => (
                         <tr>
-                            <td>{task.name}</td>
+                            <td>{editingTaskName !== task.name ? task.name :
+                                (
+                                    <div className={'tasks-group-inline'}>
+                                        <Form.Control defaultValue={task.name} type={'text'} onChange={(event) => onEdit_TextChanged(event)}/>
+                                        <div className={'icon-group-horizontal'}>
+                                            <img onClick={() => onCancelEdit()} src={Cancel}/>
+                                            <img onClick={() => onCompleteEdit(task.name)} src={Check}/>
+                                        </div>
+                                        
+                                    </div>
+                                )}</td>
                             <td>{task.createdOn}</td>
                             <td>
-                                <div className={'icon-group-horizontal'}>
+                                {editingTaskName === undefined && <div className={'icon-group-horizontal'}>
                                     <img onClick={() => onBeginEdit(task.name)} src={Edit}/>
                                     <img onClick={() => onBeginDelete(task.name)} src={Delete}/>
-                                </div>
+                                </div>}
                             </td>
                         </tr>
                     ))}
