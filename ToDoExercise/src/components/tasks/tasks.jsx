@@ -15,31 +15,33 @@ import './tasks.css';
 function Tasks () {
 
     const [tasks, setTasks] = useState([]);
-    const [taskName, setTaskName] = useState();
     const [showEditTask, setShowEditTask] = useState(false);
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [editingTaskName, setEditingTaskName] = useState();
     const [deletingTaskName, setDeletingTaskName] = useState();
     const [updateTaskName, setUpdateTaskName] = useState();
-    const [confirmationType, setConfirmationType] = useState();
     const [confirmationDisplay, setConfirmationDisplay] = useState();
-    const [onDeleteTask, setOnDeleteTask] = useState(() => console.log('OnDeleteTask - Not Impelemented'));
     const [storedTaskList, setStoredTaskList] = useState([]);
+
     const onAddTaskSave = (taskName) => {
         let currentTasks = [...tasks];
         storeTaskListCopy([...tasks]);
         let newTask = {
             name: taskName,
-            createdOn: new Date().getDate()
+            createdOn: getCurrentDateTime(),
+            updatedOn: getCurrentDateTime()
         }
         currentTasks.push(newTask);
         setTasks(currentTasks);
         setShowEditTask(false);
     }
 
+    const getCurrentDateTime = () => {
+        const currentDate = new Date();
+        return `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()} ${currentDate.getHours()}:${currentDate.getMinutes()}:${currentDate.getSeconds()}`;
+    }
     const onBeginEdit = (taskName) => {
         setEditingTaskName(taskName);
-        setConfirmnationType('edit');
     }
 
     const onEdit_TextChanged = (event) => {
@@ -61,7 +63,7 @@ function Tasks () {
                 return {
                     name: updateTaskName,
                     createdOn: task.createdOn,
-                    UpdatedOn: new Date().getTime()
+                    updatedOn: getCurrentDateTime()
                 };
             }
 
@@ -76,7 +78,6 @@ function Tasks () {
         setDeletingTaskName(taskName);
         setConfirmationDisplay(`Are you sure you want to delete '${taskName}?'`);
         setShowConfirmation(true);
-        setConfirmationType('delete');
     }
 
     const onCompleteDelete = () => {
@@ -92,7 +93,6 @@ function Tasks () {
 
         let updateStoredTaskList = [...storedTaskList];
         updateStoredTaskList.push(tasks);
-        console.log({StoredTaskList: updateStoredTaskList})
         setStoredTaskList(updateStoredTaskList);
     }
 
@@ -134,6 +134,7 @@ function Tasks () {
                 <thead>
                     <th>Task Name</th>
                     <th>Created On</th>
+                    <th>Updated On</th>
                     <th></th>
                 </thead>
                 <tbody>
@@ -151,6 +152,7 @@ function Tasks () {
                                     </div>
                                 )}</td>
                             <td>{task.createdOn}</td>
+                            <td>{task.updatedOn}</td>
                             <td>
                                 {editingTaskName === undefined && <div className={'icon-group-horizontal'}>
                                     <img onClick={() => onBeginEdit(task.name)} src={Edit}/>
