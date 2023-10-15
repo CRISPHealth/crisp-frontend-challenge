@@ -8,7 +8,7 @@ import Delete from '../../assets/bin.png';
 import Edit from '../../assets/pen.png';
 import Check from '../../assets/check.png';
 import Cancel from '../../assets/cancel.png';
-import EditTaskConfirmation from './edit-task-confirmation/edit-task-confirmation';
+import DeleteTaskConfirmation from './delete-task-confirmation/delete-task-confirmation';
 import './tasks.css';
 
 function Tasks () {
@@ -18,6 +18,7 @@ function Tasks () {
     const [showEditTask, setShowEditTask] = useState(false);
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [editingTaskName, setEditingTaskName] = useState();
+    const [deletingTaskName, setDeletingTaskName] = useState();
     const [updateTaskName, setUpdateTaskName] = useState();
     const [confirmationType, setConfirmationType] = useState();
     const [confirmationDisplay, setConfirmationDisplay] = useState();
@@ -67,15 +68,19 @@ function Tasks () {
         setEditingTaskName(undefined);
     }
     const onBeginDelete = (taskName) => {
-        setConfirmationDisplay('Are you sure you want to delete this?');
+        setDeletingTaskName(taskName);
+        setConfirmationDisplay(`Are you sure you want to delete '${taskName}?'`);
         setShowConfirmation(true);
         setConfirmationType('delete');
     }
 
-    const onDelete = (taskName) => {
+    const onCompleteDelete = () => {
+        console.log({TaskName: taskName})
         let updateTasks = [...tasks];
-        let filteredTasks = updateTasks.filter((x) => x.name !== taskName);
+        let filteredTasks = updateTasks.filter((x) => x.name !== deletingTaskName);
+        console.log({FilteredTasks: filteredTasks})
         setTasks(filteredTasks);
+        setShowConfirmation(false);
     }
 
     return (<div>
@@ -85,9 +90,9 @@ function Tasks () {
                 onSave={(taskName) => onAddTaskSave(taskName)}/>}
 
         {showConfirmation &&
-            <EditTaskConfirmation
+            <DeleteTaskConfirmation
                 text={confirmationDisplay}
-                onYes={() => onDelete()}
+                onYes={() => onCompleteDelete()}
                 onNo={() => setShowConfirmation(false)}/>}
             <h1>Tasks</h1>
         <div>

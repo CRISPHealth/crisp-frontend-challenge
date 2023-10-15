@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import './edit-task-confirmation.css';
+import './delete-task-confirmation.css';
 
 function EditTaskConfirmation (props) {
 
