@@ -1,0 +1,44 @@
+.metric-popup {
+    background-color: #6F346D;
+    border-radius: 8px;
+    border: 1px solid #F2F2F2;
+    color: #F2F2F2;
+    position: fixed;
+    top: 8.5rem;
+    left: 50%;
+    transform: translate(-50%);
+    padding: 2rem;
+    z-index: 1;
+}
+
+#metrics {
+    float: left;
+    background-color: transparent;
+    padding: 1.25rem 0 0 0;
+}
+
+#metrics:hover {
+    color: #6F346D;
+}
+
+#undo,
+#redo {
+    color: #F2F2F2;
+    font-size: 2rem;
+    padding: 1.25rem 2rem 0 2rem;
+    float: right;
+}
+
+#undo:hover,
+#redo:hover {
+    color: #6F346D;
+    cursor: pointer;
+}
+
+#close-metrics {
+    float: right;
+}
+
+#close-metrics:hover {
+    color: #331832;
+}
