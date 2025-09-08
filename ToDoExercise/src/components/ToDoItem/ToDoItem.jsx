@@ -27,6 +27,7 @@ export default function ToDoItem(todo) {
             startDate: todo.startDate,
             isComplete: !todo.isComplete
         }));
+        dispatch(historyActions.addHistory(toDoList));
     };
 
     // On task item edit click, update UI to render description and dueDate as inputs for editing task item values.
@@ -41,6 +42,7 @@ export default function ToDoItem(todo) {
             description: descriptionInput,
             dueDate: dueDateInput
         }));
+        dispatch(historyActions.addHistory(toDoList));
 
         setInEdit(false);
     };
